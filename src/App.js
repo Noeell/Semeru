@@ -9,8 +9,8 @@ function App() {
     return (
         <Switch>
             <Route path="/statistik" component={Statistik}/>
+            <Route path="/signup" component={signup}/>
             <Route path="/" component={Login}/>
-            <Route path="/signup" component={signup()}/>
             <Route component={() => <><p>Seite nicht deklariert</p></>}/>
         </Switch>
     );
