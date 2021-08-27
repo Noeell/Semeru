@@ -6,6 +6,9 @@ import Startpage from "./Startpage";
 import Statistik from "./Statistik";
 import SignUp from "./SignUp";
 import Firebase from "firebase/compat";
+import Tag from "./Tag";
+import Monat from "./Monat";
+import Woche from "./Woche";
 
 function App() {
 
