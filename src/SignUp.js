@@ -1,6 +1,7 @@
 import {useState} from "react";
 import Firebase from "firebase/compat";
 import {useHistory} from "react-router-dom";
+import {Button, Col, Container, Row} from "react-bootstrap";
 
 export default function SignUp() {
     const [eMail, setEMail] = useState()
@@ -22,21 +23,37 @@ export default function SignUp() {
 
     return (
         <div>
-            <h1>Sign Up</h1>
-            <br/>
-            <h4>E-Mail</h4>
-            <input onChange={e => setEMail(e.target.value)}/>
-            <br/>
-            <h4>Passwort</h4>
-            <input type="password" name="password" onChange={e => setPassword(e.target.value)}/>
-            <h4>Passwort bestätigen</h4>
-            <input type="password" name="password" onChange={e => setPassword2(e.target.value)}/>
-            <br/>
-            <br/>
-            <button onClick={checkPassword}>Sign Up</button>
-            <br/>
-            <br/>
-            <button onClick={() => history.push('/start')}>Start</button>
+            <Container><br/>
+                <Row>
+                    <Col>
+                        <h1>Sign Up</h1>
+                    </Col>
+                </Row><br/>
+                <Row>
+                    <Col>
+                        <h4>E-Mail</h4>
+                        <input onChange={e => setEMail(e.target.value)}/>
+                    </Col>
+                </Row><br/>
+                <Row>
+                    <Col>
+                        <h4>Passwort</h4>
+                        <input type="password" name="password" onChange={e => setPassword(e.target.value)}/>
+                    </Col>
+                </Row><br/>
+                <Row>
+                    <Col>
+                        <h4>Passwort bestätigen</h4>
+                        <input type="password" name="password" onChange={e => setPassword2(e.target.value)}/>
+                    </Col>
+                </Row>
+                <br/>
+                <Row>
+                    <Col>
+                        <Button variant={"primary"} onClick={checkPassword}>Sign Up</Button>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 }
