@@ -21,7 +21,7 @@ export default function Login(){
         if (eMail !== null && password !== null) {
             Firebase.auth()
                 .signInWithEmailAndPassword(eMail, password)
-                .then(() => history.push(''))
+                .then(() => history.push('/startseite'))
                 .catch(error => console.error("could not create user: ", error))
         }
     }
@@ -38,7 +38,7 @@ export default function Login(){
             <br/>
             <button onClick={buttonPressed}>login</button>
             <br/>
-            <Link to="/about">Sie haben noch kein Konto? Hier registrieren</Link>
+            <Link to="/signup">Sie haben noch kein Konto? Hier registrieren</Link>
         </div>
     );
 }
