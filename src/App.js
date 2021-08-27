@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import Login from "./Login";
 import {NavLink, Route, Switch} from "react-router-dom";
 import Startpage from "./Startpage";
-import signup from "./signup";
+import signup from "./SignUp";
 import Statistik from "./Statistik";
 
 function App() {
