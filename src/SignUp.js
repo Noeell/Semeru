@@ -1,6 +1,5 @@
-import '../styles/App.css'
 import {useState} from "react";
-import Firebase from "firebase";
+import Firebase from "firebase/compat";
 import {useHistory} from "react-router-dom";
 
 export default function SignUp() {
