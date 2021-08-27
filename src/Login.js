@@ -1,4 +1,4 @@
-import Firebase from "firebase";
+import Firebase from "firebase/compat";
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 
