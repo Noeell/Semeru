@@ -1,5 +1,6 @@
 import {Col, Container, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import Firebase from "firebase/compat";
 
 export default function Statistik() {
     return (
@@ -18,6 +19,9 @@ export default function Statistik() {
                     </Col>
                 </Row>
             </Container>
+            {
+                !Firebase.app().auth().currentUser && <Redirect to={"/"}/>
+            }
         </div>
     )
 }
