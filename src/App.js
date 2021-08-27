@@ -27,8 +27,8 @@ function App() {
             <div>
                 <br/>
                 <div className='header'>
-                    <HeaderLink page='statistik' selected={page === 'statistik'} />
                     <HeaderLink page='startseite' selected={page === 'startseite'} />
+                    <HeaderLink page='statistik' selected={page === 'statistik'} />
                 </div>
             </div>
 
