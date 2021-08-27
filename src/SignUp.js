@@ -13,7 +13,7 @@ export default function SignUp() {
         if (password === password2) {
             Firebase.auth()
                 .createUserWithEmailAndPassword(eMail, password)
-                .then(() => Firebase.auth().signInWithEmailAndPassword(eMail, password).then(() => history.push('/cardproject')))
+                .then(() => Firebase.auth().signInWithEmailAndPassword(eMail, password).then(() => history.push('/startseite')))
                 .catch(error => console.error("could not create user: ", error))
         } else {
             console.log('Passwort stimmt nicht über ein')
