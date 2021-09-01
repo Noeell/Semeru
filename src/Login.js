@@ -1,7 +1,7 @@
 import Firebase from "firebase/compat";
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row, Form} from "react-bootstrap";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1AltKxep7brHa87pM7x8YOS7Oo48AYMQ",

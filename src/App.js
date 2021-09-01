@@ -9,10 +9,11 @@ import Firebase from "firebase/compat";
 import Tag from "./Tag";
 import Monat from "./Monat";
 import Woche from "./Woche";
+import NewTask from "./NewTask";
 
 function App() {
 
-    const HeaderLink = ({ page }, props) => {
+    const HeaderLink = ({page}, props) => {
         const title = page.charAt(0).toUpperCase() + page.slice(1);
         return <Link to={`/${page}`} className='headerlink-title'>
             {title}
@@ -27,22 +28,23 @@ function App() {
             <div>
                 <br/>
                 <div className='header'>
-                    <HeaderLink page='startseite' selected={page === 'startseite'} />
-                    <HeaderLink page='statistik' selected={page === 'statistik'} />
+                    <HeaderLink page='startseite' selected={page === 'startseite'}/>
+                    <HeaderLink page='statistik' selected={page === 'statistik'}/>
+                    <HeaderLink page='New Task' selected={page === 'new task'}/>
                 </div>
             </div>
-
         );
     };
 
     return (
         <div>
             <Router>
-                <Route path='/:page' component={Header} />
+                <Route path='/:page' component={Header}/>
 
                 <Route exact path="/statistik" component={Statistik}/>
                 <Route exact path="/signup" component={SignUp}/>
                 <Route exact path="/startseite" component={Startpage}/>
+                <Route exact path="/new task" component={NewTask}/>
                 <Route exact path="/" component={Login}/>
             </Router>
 
