@@ -6,12 +6,20 @@ import Startpage from "./Startpage";
 import Statistik from "./Statistik";
 import SignUp from "./SignUp";
 import Firebase from "firebase/compat";
-import Tag from "./Tag";
-import Monat from "./Monat";
-import Woche from "./Woche";
 import NewTask from "./NewTask";
 
 function App() {
+
+    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
+        .get()
+        .then(snapshot => {
+            Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
+                .update( {
+                    test:10
+                })
+        })
 
     const HeaderLink = ({page}, props) => {
         const title = page.charAt(0).toUpperCase() + page.slice(1);
