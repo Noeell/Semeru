@@ -24,9 +24,9 @@ export default function Statistik(){
             <div>
                 <br/>
                 <div className='header'>
-                    <HeaderLink page='tag' selected={page === 'tag'} />
-                    <HeaderLink page='woche' selected={page === 'woche'} />
-                    <HeaderLink page='monat' selected={page === 'monat'} />
+                    <HeaderLink page='day' selected={page === 'day'} />
+                    <HeaderLink page='week' selected={page === 'week'} />
+                    <HeaderLink page='month' selected={page === 'month'} />
                 </div>
             </div>
 
@@ -38,7 +38,7 @@ export default function Statistik(){
             <Container>
                 <Row>
                     <Col>
-                        <h1>Statistik</h1>
+                        <h1>Statistics</h1>
                     </Col>
                 </Row>
                 <Row>
@@ -46,9 +46,9 @@ export default function Statistik(){
                         <Router>
                             <Route path='/:page' component={Header} />
 
-                            <Route exact path="/tag" component={Tag}/>
-                            <Route exact path="/woche" component={Woche}/>
-                            <Route exact path="/monat" component={Monat}/>
+                            <Route exact path="/day" component={Tag}/>
+                            <Route exact path="/week" component={Woche}/>
+                            <Route exact path="/month" component={Monat}/>
                         </Router>
                     </Col>
                 </Row>

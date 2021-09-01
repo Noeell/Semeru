@@ -10,17 +10,6 @@ import NewTask from "./NewTask";
 
 function App() {
 
-    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
-        .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
-        .get()
-        .then(snapshot => {
-            Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
-                .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
-                .update( {
-                    test:10
-                })
-        })
-
     const HeaderLink = ({page}, props) => {
         const title = page.charAt(0).toUpperCase() + page.slice(1);
         return <Link to={`/${page}`} className='headerlink-title'>
@@ -36,9 +25,9 @@ function App() {
             <div>
                 <br/>
                 <div className='header'>
-                    <HeaderLink page='startseite' selected={page === 'startseite'}/>
-                    <HeaderLink page='statistik' selected={page === 'statistik'}/>
-                    <HeaderLink page='New Task' selected={page === 'new task'}/>
+                    <HeaderLink page='startpage' selected={page === 'startpage'}/>
+                    <HeaderLink page='statistics' selected={page === 'statistics'}/>
+                    <HeaderLink page='Manage Tasks' selected={page === 'manage tasks'}/>
                 </div>
             </div>
         );
@@ -47,12 +36,14 @@ function App() {
     return (
         <div>
             <Router>
-                <Route path='/:page' component={Header}/>
+                <Route path='/startpage' component={Header}/>
+                <Route path='/statistics' component={Header}/>
+                <Route path='/manage tasks' component={Header}/>
 
-                <Route exact path="/statistik" component={Statistik}/>
+                <Route exact path="/statistics" component={Statistik}/>
                 <Route exact path="/signup" component={SignUp}/>
-                <Route exact path="/startseite" component={Startpage}/>
-                <Route exact path="/new task" component={NewTask}/>
+                <Route exact path="/startpage" component={Startpage}/>
+                <Route exact path="/manage tasks" component={NewTask}/>
                 <Route exact path="/" component={Login}/>
             </Router>
 

@@ -6,7 +6,7 @@ export default function Monat() {
             <Container>
                 <Row>
                     <Col>
-                        <h1>Monat</h1>
+                        <h1>Month</h1>
                     </Col>
                 </Row><br/>
                 <Row>

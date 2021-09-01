@@ -6,7 +6,7 @@ export default function Tag() {
             <Container>
                 <Row>
                     <Col>
-                        <h1>Tag</h1>
+                        <h1>Day</h1>
                     </Col>
                 </Row>
             </Container>

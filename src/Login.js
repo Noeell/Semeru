@@ -23,7 +23,7 @@ export default function Login() {
         if (eMail !== null && password !== null) {
             Firebase.auth()
                 .signInWithEmailAndPassword(eMail, password)
-                .then(() => history.push('/startseite'))
+                .then(() => history.push('/startpage'))
                 .catch(error => console.error("could not create user: ", error))
         }
     }
@@ -44,7 +44,7 @@ export default function Login() {
                 <br/>
                 <Row>
                     <Col>
-                        <h4>Passwort</h4>
+                        <h4>Password</h4>
                         <input type="password" name="password" onChange={e => setPassword(e.target.value)}/>
                     </Col>
                 </Row><br/>
@@ -54,7 +54,7 @@ export default function Login() {
                     </Col>
                 </Row>
                 <Row>
-                    <Link to="/signup">Sie haben noch kein Konto? Hier registrieren</Link>
+                    <Link to="/signup">No Account yet? Register here</Link>
                 </Row>
             </Container>
         </div>

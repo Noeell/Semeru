@@ -6,7 +6,7 @@ export default function Woche() {
             <Container>
                 <Row>
                     <Col>
-                        <h1>Woche</h1>
+                        <h1>Week</h1>
                     </Col>
                 </Row>
             </Container>

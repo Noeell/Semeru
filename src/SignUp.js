@@ -14,7 +14,7 @@ export default function SignUp() {
         if (password === password2) {
             Firebase.auth()
                 .createUserWithEmailAndPassword(eMail, password)
-                .then(() => Firebase.auth().signInWithEmailAndPassword(eMail, password).then(() => history.push('/startseite')))
+                .then(() => Firebase.auth().signInWithEmailAndPassword(eMail, password).then(() => history.push('/startpage')))
                 .catch(error => console.error("could not create user: ", error))
         } else {
             console.log('Passwort stimmt nicht über ein')
@@ -37,13 +37,13 @@ export default function SignUp() {
                 </Row><br/>
                 <Row>
                     <Col>
-                        <h4>Passwort</h4>
+                        <h4>Password</h4>
                         <input type="password" name="password" onChange={e => setPassword(e.target.value)}/>
                     </Col>
                 </Row><br/>
                 <Row>
                     <Col>
-                        <h4>Passwort bestätigen</h4>
+                        <h4>confirm Password</h4>
                         <input type="password" name="password" onChange={e => setPassword2(e.target.value)}/>
                     </Col>
                 </Row>
@@ -51,6 +51,12 @@ export default function SignUp() {
                 <Row>
                     <Col>
                         <Button variant={"primary"} onClick={checkPassword}>Sign Up</Button>
+                    </Col>
+                </Row>
+                <br/>
+                <Row>
+                    <Col>
+                        <Button variant={"primary"} onClick={history.goBack}>Back to Login</Button>
                     </Col>
                 </Row>
             </Container>
