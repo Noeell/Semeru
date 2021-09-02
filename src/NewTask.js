@@ -10,11 +10,11 @@ export default function NewTask() {
     const [buttonDisable, setButtonDisable] = useState(true)
 
     useEffect(() => {
-        Firebase .app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
             .get()
             .then(snapshot => {
-                setAllTasks(Object.keys(snapshot.val()))
+                setAllTasks(Object.keys(snapshot.val() || {}))
             })
     })
 
@@ -33,7 +33,7 @@ export default function NewTask() {
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
                 .get()
                 .then(snapshot => {
-                    setAllTasks(Object.keys(snapshot.val()))
+                    setAllTasks(Object.keys(snapshot.val() || {}))
                 })
             setM("created new Task")
             setNewTaskName("")
@@ -51,7 +51,7 @@ export default function NewTask() {
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
             .get()
             .then(snapshot => {
-                setAllTasks(Object.keys(snapshot.val()))
+                setAllTasks(Object.keys(snapshot.val() || {}))
             })
 
         setSelected("")
@@ -66,6 +66,11 @@ export default function NewTask() {
     return (
         <div>
             <Container>
+                <Row>
+                    <Col>
+                        <h1>Manage Tasks</h1>
+                    </Col>
+                </Row>
                 <br/>
                 <Row>
                     <Col>

@@ -1,7 +1,7 @@
 import './Header.css';
 import './App.css'
 import Login from "./Login";
-import {Link, NavLink, Redirect, Route, BrowserRouter as Router, Switch, useParams} from "react-router-dom";
+import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
 import Startpage from "./Startpage";
 import Statistik from "./Statistik";
 import SignUp from "./SignUp";
@@ -10,24 +10,24 @@ import NewTask from "./NewTask";
 
 function App() {
 
-    const HeaderLink = ({page}, props) => {
+    const HeaderLink = ({page, display, selected}) => {
         const title = page.charAt(0).toUpperCase() + page.slice(1);
         return <Link to={`/${page}`} className='headerlink-title'>
-            {title}
-            <div className={props.selected ? 'headerlink-dot-active' : 'headerlink-dot'}>•</div>
+            {display || title}
+            <div className={selected ? 'headerlink-dot-active' : 'headerlink-dot'}>•</div>
         </Link>;
     };
 
     const Header = () => {
-        const page = useParams().page || 'startseite';
-
+        const page = window.location.pathname.replace('/', '') || 'startseite';
+        console.log(page)
         return (
             <div>
                 <br/>
                 <div className='header'>
                     <HeaderLink page='startpage' selected={page === 'startpage'}/>
                     <HeaderLink page='statistics' selected={page === 'statistics'}/>
-                    <HeaderLink page='Manage Tasks' selected={page === 'manage tasks'}/>
+                    <HeaderLink page='manage-tasks' display={'Manage Tasks'} selected={page === 'manage-tasks'}/>
                 </div>
             </div>
         );
@@ -38,12 +38,12 @@ function App() {
             <Router>
                 <Route path='/startpage' component={Header}/>
                 <Route path='/statistics' component={Header}/>
-                <Route path='/manage tasks' component={Header}/>
+                <Route path='/manage-tasks' component={Header}/>
 
                 <Route exact path="/statistics" component={Statistik}/>
                 <Route exact path="/signup" component={SignUp}/>
                 <Route exact path="/startpage" component={Startpage}/>
-                <Route exact path="/manage tasks" component={NewTask}/>
+                <Route exact path="/manage-tasks" component={NewTask}/>
                 <Route exact path="/" component={Login}/>
             </Router>
 

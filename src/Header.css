@@ -15,14 +15,18 @@
     transition: opacity 200ms linear;
 }
 
-.headerlink-title:focus .headerlink-dot {
+.headerlink-dot {
+    opacity: 0;
+}
+
+.headerlink-title:focus  {
     opacity: 1;
 }
 
 .headerlink-dot-active {
+    opacity: 1;
     margin-top: -0.5rem;
     display: block;
-
 }
 
 .headerlink-no-link {
