@@ -20,7 +20,6 @@ function App() {
 
     const Header = () => {
         const page = window.location.pathname.replace('/', '') || 'startseite';
-        console.log(page)
         return (
             <div>
                 <br/>

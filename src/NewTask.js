@@ -24,7 +24,7 @@ export default function NewTask() {
             Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${newTaskName}`)
                 .update({
-                    start: Date.now(),
+                    start: 0,
                     Tag: 0,
                     Woche: 0,
                     Monat: 0
@@ -88,8 +88,8 @@ export default function NewTask() {
                 <Table striped bordered hover>
                     <tbody>
                     {allTasks?.map((task, index) =>
-                        <tr onClick={() => tableClicked(task)}>
-                            <th key={index}>{task}</th>
+                        <tr  key={index} onClick={() => tableClicked(task)}>
+                            <th>{task}</th>
                         </tr>
                     )}
                     </tbody>
