@@ -7,6 +7,7 @@ export default function SignUp() {
     const [eMail, setEMail] = useState()
     const [password, setPassword] = useState()
     const [password2, setPassword2] = useState()
+    const [errormessage, setErrormessage] = useState("")
 
     const history = useHistory()
 
@@ -18,6 +19,7 @@ export default function SignUp() {
                 .catch(error => console.error("could not create user: ", error))
         } else {
             console.log('Passwort stimmt nicht über ein')
+            setErrormessage("Passowrds do not match")
         }
     }
 

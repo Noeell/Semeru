@@ -2,6 +2,7 @@ import Firebase from "firebase/compat";
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {Button, Col, Container, Row, Form} from "react-bootstrap";
+import {FirebaseError} from "firebase/firebase-app";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1AltKxep7brHa87pM7x8YOS7Oo48AYMQ",
@@ -16,6 +17,7 @@ export default function Login() {
 
     const [eMail, setEMail] = useState()
     const [password, setPassword] = useState()
+    const [messageField, setMessageField] = useState("")
 
     const history = useHistory();
 
@@ -23,8 +25,14 @@ export default function Login() {
         if (eMail !== null && password !== null) {
             Firebase.auth()
                 .signInWithEmailAndPassword(eMail, password)
-                .then(() => history.push('/startpage'))
-                .catch(error => console.error("could not create user: ", error))
+                .then(() => {
+                    history.push('/startpage')
+                    setMessageField("")
+                })
+                .catch(error => {
+                    console.error("could not create user: ", error)
+                        setMessageField("Wrong e-mail or password")
+                })
         }
     }
 
@@ -52,9 +60,14 @@ export default function Login() {
                     <Col>
                         <Button variant={"primary"} onClick={buttonPressed}>login</Button>
                     </Col>
-                </Row>
+                    <Row>
+                        <Link to="/signup">No Account yet? Register here</Link>
+                    </Row>
+                </Row><br/>
                 <Row>
-                    <Link to="/signup">No Account yet? Register here</Link>
+                    <Col>
+                        <p Class={"text-danger"}>{messageField}</p>
+                    </Col>
                 </Row>
             </Container>
         </div>
