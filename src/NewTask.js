@@ -20,7 +20,7 @@ export default function NewTask() {
 
     function addNewTask() {
         setM(null)
-        if (newTaskName !== "" && newTaskName !== null) {
+        if (newTaskName.trim() !== "" && newTaskName !== null) {
             Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${newTaskName}`)
                 .update({
@@ -39,6 +39,7 @@ export default function NewTask() {
             setNewTaskName("")
         } else {
             setM("please take a valid name")
+            setNewTaskName("")
         }
     }
 
