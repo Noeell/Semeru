@@ -1,6 +1,6 @@
 import {useState} from "react";
 import Firebase from "firebase/compat";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Button, Col, Container, Row} from "react-bootstrap";
 
 export default function SignUp() {
@@ -16,7 +16,10 @@ export default function SignUp() {
             Firebase.auth()
                 .createUserWithEmailAndPassword(eMail, password)
                 .then(() => Firebase.auth().signInWithEmailAndPassword(eMail, password).then(() => history.push('/startpage')))
-                .catch(error => console.error("could not create user: ", error))
+                .catch(error => {
+                    console.error("could not create user: ", error)
+                    setErrormessage("Email or password does not meet our safety requirements")
+                })
         } else {
             console.log('Passwort stimmt nicht über ein')
             setErrormessage("Passowrds do not match")
@@ -55,10 +58,14 @@ export default function SignUp() {
                         <Button variant={"primary"} onClick={checkPassword}>Sign Up</Button>
                     </Col>
                 </Row>
-                <br/>
                 <Row>
                     <Col>
-                        <Button variant={"primary"} onClick={history.goBack}>Back to Login</Button>
+                        <Link to="/">Already have an account? Login here</Link>
+                    </Col>
+                </Row><br/>
+                <Row>
+                    <Col>
+                        <p Class={"text-danger"}>{errormessage}</p>
                     </Col>
                 </Row>
             </Container>
