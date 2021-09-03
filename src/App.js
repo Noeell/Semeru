@@ -34,17 +34,15 @@ function App() {
 
     return (
         <div>
-            <Router>
-                <Route path='/startpage' component={Header}/>
-                <Route path='/statistics' component={Header}/>
-                <Route path='/manage-tasks' component={Header}/>
+            <Route path='/startpage' component={Header}/>
+            <Route path='/statistics' component={Header}/>
+            <Route path='/manage-tasks' component={Header}/>
 
-                <Route exact path="/statistics" component={Statistik}/>
-                <Route exact path="/signup" component={SignUp}/>
-                <Route exact path="/startpage" component={Startpage}/>
-                <Route exact path="/manage-tasks" component={NewTask}/>
-                <Route exact path="/" component={Login}/>
-            </Router>
+            <Route exact path="/statistics" component={Statistik}/>
+            <Route exact path="/signup" component={SignUp}/>
+            <Route exact path="/startpage" component={Startpage}/>
+            <Route exact path="/manage-tasks" component={NewTask}/>
+            <Route exact path="/" component={Login}/>
 
             {
                 !Firebase.app().auth().currentUser && <Redirect to={"/"}/>
