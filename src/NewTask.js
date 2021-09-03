@@ -25,9 +25,10 @@ export default function NewTask() {
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${newTaskName}`)
                 .update({
                     start: 0,
-                    Tag: 0,
-                    Woche: 0,
-                    Monat: 0
+                    tag: 0,
+                    woche: 0,
+                    monat: 0,
+                    name: newTaskName
                 })
             Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
@@ -44,6 +45,22 @@ export default function NewTask() {
     }
 
     function deleteTask() {
+        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+            .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${selected}`)
+            .get()
+            .then(snapshot => {
+                Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                    .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks/${selected}`)
+                    .update({
+                        start: snapshot.val().start,
+                        tag: snapshot.val().tag,
+                        woche: snapshot.val().woche,
+                        monat: snapshot.val().monat,
+                        name: snapshot.val().name,
+                        }
+            )
+            })
+
         Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${selected}`)
             .remove()
@@ -89,7 +106,7 @@ export default function NewTask() {
                 <Table striped bordered hover>
                     <tbody>
                     {allTasks?.map((task, index) =>
-                        <tr  key={index} onClick={() => tableClicked(task)}>
+                        <tr key={index} onClick={() => tableClicked(task)}>
                             <th>{task}</th>
                         </tr>
                     )}
