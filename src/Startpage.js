@@ -110,7 +110,7 @@ export default function Startpage() {
                                             woche: time
                                         })
                                 } else {
-                                    let oldTime = snapshot.val().Tag.split(":")
+                                    let oldTime = snapshot.val().woche.split(":")
                                     let newHours = Math.floor((parseInt(oldTime[1]) + minutes) / 60)
                                     if (parseInt(oldTime[1]) + minutes >= 60){
                                         hours = parseInt(oldTime[0]) + hours + newHours
@@ -133,7 +133,7 @@ export default function Startpage() {
                                             monat: time
                                         })
                                 } else {
-                                    let oldTime = snapshot.val().tag.split(":")
+                                    let oldTime = snapshot.val().monat.split(":")
                                     let newHours = Math.floor((parseInt(oldTime[1]) + minutes) / 60)
                                     if (parseInt(oldTime[1]) + minutes >= 60){
                                         hours = parseInt(oldTime[0]) + hours + newHours

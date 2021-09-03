@@ -62,10 +62,19 @@ export default function Tag() {
                         <h1>Day</h1>
                     </Col>
                 </Row>
+                <br/>
                 <Table striped>
+                    <thead>
+                    <tr>
+                        <th scope={"col"}>#</th>
+                        <th scope={"col"}>Beschreibung</th>
+                        <th scope={"col"}>Zeit</th>
+                    </tr>
+                    </thead>
                     <tbody>
                     {allTasks?.map((task, index) =>
                         <tr key={index}>
+                            <th>{index + 1}</th>
                             <th width={"60%"}>{task.name}</th>
                             <th>{task.tag?.split(":")[1] < 10?task.tag?.split(":")[0] + ":0" + task.tag?.split(":")[1] : task.tag}</th>
                         </tr>
