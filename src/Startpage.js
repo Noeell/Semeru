@@ -38,7 +38,7 @@ export default function Startpage() {
                     setRunningTask(snapshot.val()?.runningTask || null)
                 }
             })
-    })
+    }, [])
 
     function startClicked(task) {
         console.log(runningTask)
@@ -80,14 +80,14 @@ export default function Startpage() {
                                 let minutes = Math.floor((Date.now() - snapshot.val().start)/1000/60 - (Math.floor((Date.now() - snapshot.val().start)/1000/3600)*60))
                                 let time = hours + ":" + minutes
 
-                                if (snapshot.val().Tag === 0){
+                                if (snapshot.val().tag === 0){
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
-                                            Tag: time
+                                            tag: time
                                         })
                                 } else {
-                                    let oldTime = snapshot.val().Tag.split(":")
+                                    let oldTime = snapshot.val().tag.split(":")
                                     let newHours = Math.floor((parseInt(oldTime[1]) + minutes) / 60)
                                     if (parseInt(oldTime[1]) + minutes >= 60){
                                         hours = parseInt(oldTime[0]) + hours + newHours
@@ -100,14 +100,14 @@ export default function Startpage() {
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
-                                            Tag: hours + ":" + minutes
+                                            tag: hours + ":" + minutes
                                         })
                                 }
-                                if (snapshot.val().Woche === 0){
+                                if (snapshot.val().woche === 0){
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
-                                            Woche: time
+                                            woche: time
                                         })
                                 } else {
                                     let oldTime = snapshot.val().Tag.split(":")
@@ -123,17 +123,17 @@ export default function Startpage() {
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
-                                            Woche: hours + ":" + minutes
+                                            woche: hours + ":" + minutes
                                         })
                                 }
-                                if (snapshot.val().Monat === 0){
+                                if (snapshot.val().monat === 0){
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
-                                            Monat: time
+                                            monat: time
                                         })
                                 } else {
-                                    let oldTime = snapshot.val().Tag.split(":")
+                                    let oldTime = snapshot.val().tag.split(":")
                                     let newHours = Math.floor((parseInt(oldTime[1]) + minutes) / 60)
                                     if (parseInt(oldTime[1]) + minutes >= 60){
                                         hours = parseInt(oldTime[0]) + hours + newHours
@@ -146,7 +146,7 @@ export default function Startpage() {
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
-                                            Monat: hours + ":" + minutes
+                                            monat: hours + ":" + minutes
                                         })
                                 }
                             })

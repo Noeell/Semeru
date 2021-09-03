@@ -9,17 +9,16 @@ import Login from "./Login";
 
 export default function Statistik(){
 
-    const HeaderLink = ({ page }, props) => {
+    const HeaderLink = ({page, display, selected}) => {
         const title = page.charAt(0).toUpperCase() + page.slice(1);
         return <Link to={`/${page}`} className='headerlink-title'>
-            {title}
-            <div className={props.selected ? 'headerlink-dot-active' : 'headerlink-dot'}>•</div>
+            {display || title}
+            <div className={selected ? 'headerlink-dot-active' : 'headerlink-dot'}>•</div>
         </Link>;
     };
 
     const Header = () => {
-        const page = useParams().page || 'startseite';
-
+        const page = window.location.pathname.replace('/', '') || 'statistics';
         return (
             <div>
                 <br/>
