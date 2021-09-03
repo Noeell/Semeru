@@ -103,6 +103,11 @@ export default function Startpage() {
                                             tag: hours + ":" + minutes
                                         })
                                 }
+
+                                hours = Math.floor((Date.now() - snapshot.val().start)/1000/3600)
+                                minutes = Math.floor((Date.now() - snapshot.val().start)/1000/60 - (Math.floor((Date.now() - snapshot.val().start)/1000/3600)*60))
+                                time = hours + ":" + minutes
+
                                 if (snapshot.val().woche === 0){
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
@@ -126,6 +131,11 @@ export default function Startpage() {
                                             woche: hours + ":" + minutes
                                         })
                                 }
+
+                                hours = Math.floor((Date.now() - snapshot.val().start)/1000/3600)
+                                minutes = Math.floor((Date.now() - snapshot.val().start)/1000/60 - (Math.floor((Date.now() - snapshot.val().start)/1000/3600)*60))
+                                time = hours + ":" + minutes
+
                                 if (snapshot.val().monat === 0){
                                     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
