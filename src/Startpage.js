@@ -7,9 +7,6 @@ export default function Startpage() {
     const [allTasks, setAllTasks] = useState()
     const [runningTask, setRunningTask] = useState(0)
 
-    let minutes
-    let hours
-
 
     Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
         .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
