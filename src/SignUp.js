@@ -22,7 +22,7 @@ export default function SignUp() {
                 })
         } else {
             console.log('Passwort stimmt nicht über ein')
-            setErrormessage("Passowrds do not match")
+            setErrormessage("Passwords do not match")
         }
     }
 
