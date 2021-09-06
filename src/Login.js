@@ -73,7 +73,7 @@ export default function Login() {
                 </Row><br/>
                 <Row>
                     <Col>
-                        <p Class={"text-danger"}>{messageField}</p>
+                        <p className={"text-danger"}>{messageField}</p>
                     </Col>
                 </Row>
             </Container>

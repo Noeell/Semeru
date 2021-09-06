@@ -77,7 +77,7 @@ export default function SignUp() {
                 </Row><br/>
                 <Row>
                     <Col>
-                        <p Class={"text-danger"}>{errormessage}</p>
+                        <p className={"text-danger"}>{errormessage}</p>
                     </Col>
                 </Row>
             </Container>

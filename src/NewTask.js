@@ -16,7 +16,7 @@ export default function NewTask() {
             .then(snapshot => {
                 setAllTasks(Object.keys(snapshot.val() || {}))
             })
-    })
+    }, [])
 
     function addNewTask() {
         setM(null)
