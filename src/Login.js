@@ -1,8 +1,9 @@
 import Firebase from "firebase/compat";
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {Button, Col, Container, Row, Form} from "react-bootstrap";
+import {Button, Col, Container, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import {FirebaseError} from "firebase/firebase-app";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1AltKxep7brHa87pM7x8YOS7Oo48AYMQ",
@@ -31,7 +32,7 @@ export default function Login() {
                 })
                 .catch(error => {
                     console.error("could not create user: ", error)
-                        setMessageField("Wrong e-mail or password")
+                    setMessageField("Wrong E-mail or password")
                 })
         }
     }
@@ -43,17 +44,23 @@ export default function Login() {
                     <h1>Login</h1>
                 </Row>
                 <br/>
-                <Row>
-                    <Col>
-                        <h4>E-Mail</h4>
-                        <input onChange={e => setEMail(e.target.value)}/>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={"4"}>
+                        <div className="form-floating">
+                            <FormControl type="email" className="form-control" id="floatingInput" placeholder="name@example.com"
+                                   onChange={e => setEMail(e.target.value)}/>
+                            <label htmlFor="floatingInput">Email address</label>
+                        </div>
                     </Col>
                 </Row>
                 <br/>
-                <Row>
-                    <Col>
-                        <h4>Password</h4>
-                        <input type="password" name="password" onChange={e => setPassword(e.target.value)}/>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={"4"}>
+                        <div className="form-floating">
+                            <FormControl type="password" className="form-control" id="floatingPassword" placeholder="Password"
+                                   onChange={e => setPassword(e.target.value)}/>
+                            <label htmlFor="floatingPassword">Password</label>
+                        </div>
                     </Col>
                 </Row><br/>
                 <Row>

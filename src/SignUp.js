@@ -1,7 +1,7 @@
 import {useState} from "react";
 import Firebase from "firebase/compat";
 import {Link, useHistory} from "react-router-dom";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, FormControl, Row} from "react-bootstrap";
 
 export default function SignUp() {
     const [eMail, setEMail] = useState()
@@ -34,22 +34,34 @@ export default function SignUp() {
                         <h1>Sign Up</h1>
                     </Col>
                 </Row><br/>
-                <Row>
-                    <Col>
-                        <h4>E-Mail</h4>
-                        <input onChange={e => setEMail(e.target.value)}/>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={"4"}>
+                        <div className="form-floating">
+                            <FormControl type="email" className="form-control" id="floatingInput"
+                                         placeholder="name@example.com"
+                                         onChange={e => setEMail(e.target.value)}/>
+                            <label htmlFor="floatingInput">Email address</label>
+                        </div>
                     </Col>
                 </Row><br/>
-                <Row>
-                    <Col>
-                        <h4>Password</h4>
-                        <input type="password" name="password" onChange={e => setPassword(e.target.value)}/>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={"4"}>
+                        <div className="form-floating">
+                            <FormControl type="password" className="form-control" id="floatingPassword"
+                                         placeholder="Password"
+                                         onChange={e => setPassword(e.target.value)}/>
+                            <label htmlFor="floatingPassword">Password</label>
+                        </div>
                     </Col>
                 </Row><br/>
-                <Row>
-                    <Col>
-                        <h4>confirm Password</h4>
-                        <input type="password" name="password" onChange={e => setPassword2(e.target.value)}/>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={"4"}>
+                        <div className="form-floating">
+                            <FormControl type="password" className="form-control" id="floatingPassword"
+                                         placeholder="Password"
+                                         onChange={e => setPassword2(e.target.value)}/>
+                            <label htmlFor="floatingPassword">Password</label>
+                        </div>
                     </Col>
                 </Row>
                 <br/>
