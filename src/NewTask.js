@@ -10,7 +10,7 @@ export default function NewTask() {
     const [buttonDisable, setButtonDisable] = useState(true)
 
     useEffect(() => {
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
             .get()
             .then(snapshot => {
@@ -21,7 +21,7 @@ export default function NewTask() {
     function addNewTask() {
         setM(null)
         if (newTaskName.trim() !== "" && newTaskName !== null) {
-            Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+            Firebase.app().database()
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${newTaskName}`)
                 .update({
                     start: 0,
@@ -30,7 +30,7 @@ export default function NewTask() {
                     monat: 0,
                     name: newTaskName
                 })
-            Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+            Firebase.app().database()
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
                 .get()
                 .then(snapshot => {
@@ -45,11 +45,11 @@ export default function NewTask() {
     }
 
     function deleteTask() {
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${selected}`)
             .get()
             .then(snapshot => {
-                Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                Firebase.app().database()
                     .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks/${selected}`)
                     .update({
                         start: snapshot.val().start,
@@ -61,11 +61,11 @@ export default function NewTask() {
             )
             })
 
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${selected}`)
             .remove()
 
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
             .get()
             .then(snapshot => {

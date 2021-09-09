@@ -1,7 +1,7 @@
 import './Header.css';
 import './App.css'
 import Login from "./Login";
-import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
+import {Link, Redirect, Route} from "react-router-dom";
 import Startpage from "./Startpage";
 import Statistik from "./Statistik";
 import SignUp from "./SignUp";

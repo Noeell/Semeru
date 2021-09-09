@@ -1,18 +1,20 @@
 import Firebase from "firebase/compat";
 import {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {Button, Col, Container, Form, FormControl, InputGroup, Row} from "react-bootstrap";
-import {FirebaseError} from "firebase/firebase-app";
-
+import {Button, Col, Container, FormControl, Row} from "react-bootstrap";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB1AltKxep7brHa87pM7x8YOS7Oo48AYMQ",
-    authDomain: "localhost",
-    databaseURL: "https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/",
-    storageBucket: "gs://semeru-ef465.appspot.com"
-}
-
+    apiKey: "AIzaSyC8VZZZ9afj6V51I3YBfllxMCOUzIcNAiU",
+    authDomain: "semeru-c7575.firebaseapp.com",
+    databaseURL: "https://semeru-c7575-default-rtdb.firebaseio.com",
+    projectId: "semeru-c7575",
+    storageBucket: "semeru-c7575.appspot.com",
+    messagingSenderId: "959188960077",
+    appId: "1:959188960077:web:22bdd9c8a701988aa0ed04",
+    measurementId: "G-XMMTK2MWXL"
+};
 Firebase.initializeApp(firebaseConfig);
+
 
 export default function Login() {
 

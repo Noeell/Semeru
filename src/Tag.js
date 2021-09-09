@@ -6,26 +6,22 @@ export default function Tag() {
     const [allTasks, setAllTasks] = useState()
 
     useEffect(() => {
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
             .get()
             .then(snapshot => {
                 const objects = Object.values(snapshot.val() || {});
 
-                Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                Firebase.app().database()
                     .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks`)
                     .get()
                     .then(snapshot => {
                         const objects2 = Object.values(snapshot.val() || {});
-                        const list = [...objects, ...objects2]
+                        let list = [...objects, ...objects2]
 
-                        list.map((item, index) => {
-                            if (item.tag === 0 || item.tag === "0:0"){
-                                list.splice(index)
-                            }
-                        })
+                        list = list.filter(item => (item.tag !== 0 && item.tag !== "0:0"))
 
-                        list.sort((a, b) =>{
+                        list.sort((a, b) => {
                             let timeA = a.tag.split(":")
                             let timeB = b.tag.split(":")
                             let hoursA = timeA[0]
@@ -33,14 +29,14 @@ export default function Tag() {
                             let minutesA = timeA[1]
                             let minutesB = timeB[1]
 
-                            if (hoursA > hoursB){
+                            if (hoursA > hoursB) {
                                 return -1
-                            } else if (hoursB > hoursA){
+                            } else if (hoursB > hoursA) {
                                 return 1
                             } else {
-                                if (minutesA > minutesB){
+                                if (minutesA > minutesB) {
                                     return -1
-                                } else if (minutesB > minutesA){
+                                } else if (minutesB > minutesA) {
                                     return 1
                                 } else {
                                     return 0
@@ -76,7 +72,7 @@ export default function Tag() {
                         <tr key={index}>
                             <th>{index + 1}</th>
                             <th width={"60%"}>{task.name}</th>
-                            <th>{task.tag?.split(":")[1] < 10?task.tag?.split(":")[0] + ":0" + task.tag?.split(":")[1] : task.tag}</th>
+                            <th>{task.tag?.split(":")[1] < 10 ? task.tag?.split(":")[0] + ":0" + task.tag?.split(":")[1] : task.tag}</th>
                         </tr>
                     )}
                     </tbody>

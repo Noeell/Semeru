@@ -8,11 +8,11 @@ export default function Startpage() {
     const [runningTask, setRunningTask] = useState(0)
 
 
-    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+    Firebase.app().database()
         .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
         .get()
         .then(snapshot => {
-            Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+            Firebase.app().database()
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
                 .update({
                     eMail: parseInt(snapshot.val()?.eMail) ? parseInt(snapshot.val()?.eMail) : Firebase.app().auth().currentUser.email
@@ -20,14 +20,14 @@ export default function Startpage() {
         })
 
     useEffect(() => {
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
             .get()
             .then(snapshot => {
                 setAllTasks(Object.keys(snapshot.val() || {}))
             })
 
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
             .get()
             .then(snapshot => {
@@ -35,7 +35,7 @@ export default function Startpage() {
                     setRunningTask(snapshot.val()?.runningTask || null)
                 }
             })
-    }, [])
+    }, [runningTask])
 
     function startClicked(task) {
         console.log(runningTask)
@@ -43,13 +43,13 @@ export default function Startpage() {
             stopClicked(runningTask)
         }
 
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
             .update({
                 runningTask: task
             })
 
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${task}`)
             .update({
                 start: Date.now()
@@ -59,17 +59,17 @@ export default function Startpage() {
     }
 
     function stopClicked() {
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
             .get()
             .then(snapshot => {
 
-                Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                Firebase.app().database()
                     .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${snapshot.val().runningTask}`)
                     .get()
                     .then(snapshot => {
 
-                        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                        Firebase.app().database()
                             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                             .get()
                             .then(snapshot => {
@@ -78,7 +78,7 @@ export default function Startpage() {
                                 let time = hours + ":" + minutes
 
                                 if (snapshot.val().tag === 0){
-                                    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                                    Firebase.app().database()
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
                                             tag: time
@@ -94,7 +94,7 @@ export default function Startpage() {
                                         minutes = parseInt(oldTime[1]) + minutes
                                     }
 
-                                    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                                    Firebase.app().database()
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
                                             tag: hours + ":" + minutes
@@ -106,7 +106,7 @@ export default function Startpage() {
                                 time = hours + ":" + minutes
 
                                 if (snapshot.val().woche === 0){
-                                    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                                    Firebase.app().database()
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
                                             woche: time
@@ -122,7 +122,7 @@ export default function Startpage() {
                                         minutes = parseInt(oldTime[1]) + minutes
                                     }
 
-                                    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                                    Firebase.app().database()
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
                                             woche: hours + ":" + minutes
@@ -134,7 +134,7 @@ export default function Startpage() {
                                 time = hours + ":" + minutes
 
                                 if (snapshot.val().monat === 0){
-                                    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                                    Firebase.app().database()
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
                                             monat: time
@@ -150,7 +150,7 @@ export default function Startpage() {
                                         minutes = parseInt(oldTime[1]) + minutes
                                     }
 
-                                    Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                                    Firebase.app().database()
                                         .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${runningTask}`)
                                         .update({
                                             monat: hours + ":" + minutes
@@ -162,7 +162,7 @@ export default function Startpage() {
                     })
             })
 
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
             .update({
                 runningTask: null

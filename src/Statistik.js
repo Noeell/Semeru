@@ -1,11 +1,8 @@
 import {Col, Container, Row} from "react-bootstrap";
-import {BrowserRouter as Router, Link, Route, useParams} from "react-router-dom";
-import SignUp from "./SignUp";
-import Startpage from "./Startpage";
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 import Tag from "./Tag";
 import Woche from "./Woche";
 import Monat from "./Monat";
-import Login from "./Login";
 
 export default function Statistik(){
 

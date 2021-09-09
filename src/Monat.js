@@ -6,24 +6,20 @@ export default function Monat() {
     const [allTasks, setAllTasks] = useState()
 
     useEffect(() => {
-        Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+        Firebase.app().database()
             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
             .get()
             .then(snapshot => {
                 const objects = Object.values(snapshot.val() || {});
 
-                Firebase.app().database('https://semeru-ef465-default-rtdb.europe-west1.firebasedatabase.app/')
+                Firebase.app().database()
                     .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks`)
                     .get()
                     .then(snapshot => {
                         const objects2 = Object.values(snapshot.val() || {});
-                        const list = [...objects, ...objects2]
+                        let list = [...objects, ...objects2]
 
-                        list.map((item, index) => {
-                            if (item.monat === 0 || item.monat === "0:0"){
-                                list.splice(index)
-                            }
-                        })
+                        list = list.filter(item => (item.tag !== 0 && item.tag !== "0:0"))
 
                         list.sort((a, b) =>{
                             let timeA = a.monat.split(":")
