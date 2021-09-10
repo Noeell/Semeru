@@ -57,7 +57,7 @@ export default function Startpage() {
 
                                         list.map((item, index)=> {
                                             Firebase.app().database()
-                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/${item.name}`)
+                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${item.name}`)
                                                 .update({
                                                     tag: "0:0"
                                                 })
