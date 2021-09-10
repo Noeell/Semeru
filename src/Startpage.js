@@ -77,8 +77,6 @@ export default function Startpage() {
                                                 .remove()
                                         })
                                     })
-
-
                             })
                     }
                     //Week
@@ -125,7 +123,7 @@ export default function Startpage() {
                             })
                     }
                     //Month
-                    updates = true
+                    updates = false
                     if (snapshot.val().month !== 0) {
                         let actualDate = snapshot.val().month.split(".")
                         let actualYear = actualDate[1]

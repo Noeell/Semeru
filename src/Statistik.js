@@ -41,7 +41,6 @@ export default function Statistik(){
                     <Col>
                         <Router>
                             <Route path='/:page' component={Header} />
-
                             <Route exact path="/day" component={Tag}/>
                             <Route exact path="/week" component={Woche}/>
                             <Route exact path="/month" component={Monat}/>
@@ -49,7 +48,6 @@ export default function Statistik(){
                     </Col>
                 </Row>
             </Container>
-
         </div>
     )
 }

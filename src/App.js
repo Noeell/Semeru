@@ -1,14 +1,14 @@
 import './Header.css';
 import './App.css'
 import Login from "./Login";
-import {Link, Redirect, Route} from "react-router-dom";
+import {Link, Redirect, Route, Router} from "react-router-dom";
 import Startpage from "./Startpage";
 import Statistik from "./Statistik";
 import SignUp from "./SignUp";
 import Firebase from "firebase/compat";
 import NewTask from "./NewTask";
 
-function App() {
+export default function App() {
 
     const HeaderLink = ({page, display, selected}) => {
         const title = page.charAt(0).toUpperCase() + page.slice(1);
@@ -34,10 +34,7 @@ function App() {
 
     return (
         <div>
-            <Route path='/startpage' component={Header}/>
-            <Route path='/statistics' component={Header}/>
-            <Route path='/manage-tasks' component={Header}/>
-
+            <Route path='/:page' component={Header}/>
             <Route exact path="/statistics" component={Statistik}/>
             <Route exact path="/signup" component={SignUp}/>
             <Route exact path="/startpage" component={Startpage}/>
@@ -48,8 +45,6 @@ function App() {
                 !Firebase.app().auth().currentUser && <Redirect to={"/"}/>
             }
         </div>
-
     );
 }
 
-export default App;
