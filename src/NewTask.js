@@ -96,7 +96,7 @@ export default function NewTask() {
                             <FormControl type="text"
                                          placeholder="ddd"
                                          onChange={e => setNewTaskName(e.target.value)}/>
-                            <label htmlFor="floatingInput">New Task:</label>
+                            <label htmlFor="floatingInput">New Task</label>
                         </div>
                     </Col>
                 </Row>
@@ -128,7 +128,6 @@ export default function NewTask() {
                     </Col>
                 </Row>
             </Container>
-
         </div>
     )
 }
