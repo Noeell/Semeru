@@ -88,7 +88,7 @@ export default function Startpage() {
                         let actualWeek = actualDate[0]
                         let actualYear = actualDate[1]
 
-                        if (actualWeek !== result) {
+                        if (actualWeek !== result.toString()) {
                             updates = true
                         } else if (actualYear !== new Date().getFullYear().toString()) {
                             updates = true
@@ -125,7 +125,7 @@ export default function Startpage() {
                             })
                     }
                     //Month
-                    updates = false
+                    updates = true
                     if (snapshot.val().month !== 0) {
                         let actualDate = snapshot.val().month.split(".")
                         let actualYear = actualDate[1]
@@ -154,7 +154,7 @@ export default function Startpage() {
                                             Firebase.app().database()
                                                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${item.name}`)
                                                 .update({
-                                                    month: "0:0"
+                                                    monat: "0:0"
                                                 })
                                         })
                                         objects2.map((item, index) => {
@@ -199,7 +199,6 @@ export default function Startpage() {
     )
 
     function startClicked(task) {
-        console.log(runningTask)
         if (runningTask !== null) {
             stopClicked(runningTask)
         }
