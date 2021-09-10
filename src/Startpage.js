@@ -31,16 +31,16 @@ export default function Startpage() {
                         let actualMonth = actualDate[1]
                         let actualYear = actualDate[2]
 
-
-                        if (actualDay !== new Date().getDate()) {
+                        if (actualDay !== new Date().getDate().toString()) {
                             updates = true
-                        } else if (actualMonth !== new Date().getMonth()) {
+                        } else if (actualMonth !== new Date().getMonth().toString()) {
                             updates = true
-                        } else if (actualYear !== new Date().getFullYear()) {
+                        } else if (actualYear !== new Date().getFullYear().toString()) {
                             updates = true
                         }
                     }
 
+                    updates = true
                     if (updates === true) {
                         Firebase.app().database()
                             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
@@ -53,16 +53,21 @@ export default function Startpage() {
                                     .get()
                                     .then(snapshot => {
                                         const objects2 = Object.values(snapshot.val() || {});
-                                        let list = [...objects, ...objects2]
 
-                                        list.map((item, index)=> {
+                                        objects.map((item, index) => {
                                             Firebase.app().database()
                                                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${item.name}`)
                                                 .update({
                                                     tag: "0:0"
                                                 })
                                         })
+
+                                        objects2.map((item, index) => {
+                                            Firebase.app().database()
+                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks/${item.name}/tag`)
+                                                .remove()
                                         })
+                                    })
 
 
                             })

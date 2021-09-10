@@ -19,7 +19,7 @@ export default function Monat() {
                         const objects2 = Object.values(snapshot.val() || {});
                         let list = [...objects, ...objects2]
 
-                        list = list.filter(item => (item.tag !== 0 && item.tag !== "0:0"))
+                        list = list.filter(item => (item.monat !== 0 && item.monat !== "0:0" && item.monat !== undefined))
 
                         list.sort((a, b) =>{
                             let timeA = a.monat.split(":")
