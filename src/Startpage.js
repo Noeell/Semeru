@@ -8,6 +8,12 @@ export default function Startpage() {
     const [runningTask, setRunningTask] = useState(0)
 
     useEffect(() => {
+
+            let currentdate = new Date();
+            let oneJan = new Date(currentdate.getFullYear(), 0, 1);
+            let numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+            let result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+
             Firebase.app().database()
                 .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
                 .get()
@@ -27,6 +33,8 @@ export default function Startpage() {
                 .get()
                 .then(snapshot => {
                     let updates = false
+
+                    //Day
                     if (snapshot.val().day !== 0) {
                         let actualDate = snapshot.val().day.split(".")
                         let actualDay = actualDate[0]
@@ -73,14 +81,14 @@ export default function Startpage() {
 
                             })
                     }
-
+                    //Week
                     updates = false
-                    if (snapshot.val().month !== 0) {
-                        let actualDate = snapshot.val().month.split(".")
+                    if (snapshot.val().week !== 0) {
+                        let actualDate = snapshot.val().week.split(".")
+                        let actualWeek = actualDate[0]
                         let actualYear = actualDate[1]
-                        let actualMonth = actualDate[0]
 
-                        if (actualMonth !== new Date().getMonth().toString()) {
+                        if (actualWeek !== result) {
                             updates = true
                         } else if (actualYear !== new Date().getFullYear().toString()) {
                             updates = true
@@ -104,18 +112,57 @@ export default function Startpage() {
                                             Firebase.app().database()
                                                 .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${item.name}`)
                                                 .update({
-                                                    month: "0:0"
+                                                    woche: "0:0"
                                                 })
                                         })
 
                                         objects2.map((item, index) => {
                                             Firebase.app().database()
-                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks/${item.name}/month`)
+                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks/${item.name}/woche`)
                                                 .remove()
                                         })
                                     })
+                            })
+                    }
+                    //Month
+                    updates = false
+                    if (snapshot.val().month !== 0) {
+                        let actualDate = snapshot.val().month.split(".")
+                        let actualYear = actualDate[1]
+                        let actualMonth = actualDate[0]
 
+                        if (actualMonth !== new Date().getMonth().toString()) {
+                            updates = true
+                        } else if (actualYear !== new Date().getFullYear().toString()) {
+                            updates = true
+                        }
+                    }
+                    if (updates === true) {
+                        Firebase.app().database()
+                            .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
+                            .get()
+                            .then(snapshot => {
+                                const objects = Object.values(snapshot.val() || {});
 
+                                Firebase.app().database()
+                                    .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks`)
+                                    .get()
+                                    .then(snapshot => {
+                                        const objects2 = Object.values(snapshot.val() || {});
+
+                                        objects.map((item, index) => {
+                                            Firebase.app().database()
+                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${item.name}`)
+                                                .update({
+                                                    month: "0:0"
+                                                })
+                                        })
+                                        objects2.map((item, index) => {
+                                            Firebase.app().database()
+                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks/${item.name}`)
+                                                .remove()
+                                        })
+                                    })
                             })
                     }
                 })
@@ -128,6 +175,7 @@ export default function Startpage() {
                         .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
                         .update({
                             day: new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear(),
+                            week: result + "." + new Date().getFullYear(),
                             month: new Date().getMonth() + "." + new Date().getFullYear(),
                         })
                 })
@@ -147,9 +195,7 @@ export default function Startpage() {
                         setRunningTask(snapshot.val()?.runningTask || null)
                     }
                 })
-        }
-        ,
-        [runningTask]
+        }, [runningTask]
     )
 
     function startClicked(task) {
