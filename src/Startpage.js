@@ -16,7 +16,9 @@ export default function Startpage() {
                         .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
                         .update({
                             eMail: parseInt(snapshot.val()?.eMail) ? parseInt(snapshot.val()?.eMail) : Firebase.app().auth().currentUser.email,
-                            day: snapshot.val().day ? snapshot.val().day : 0
+                            day: snapshot.val().day ? snapshot.val().day : 0,
+                            week: snapshot.val().week ? snapshot.val().week : 0,
+                            month: snapshot.val().month ? snapshot.val().month : 0
                         })
                 })
 
@@ -40,7 +42,6 @@ export default function Startpage() {
                         }
                     }
 
-                    updates = true
                     if (updates === true) {
                         Firebase.app().database()
                             .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
@@ -72,6 +73,51 @@ export default function Startpage() {
 
                             })
                     }
+
+                    updates = false
+                    if (snapshot.val().month !== 0) {
+                        let actualDate = snapshot.val().month.split(".")
+                        let actualYear = actualDate[1]
+                        let actualMonth = actualDate[0]
+
+                        if (actualMonth !== new Date().getMonth().toString()) {
+                            updates = true
+                        } else if (actualYear !== new Date().getFullYear().toString()) {
+                            updates = true
+                        }
+                    }
+
+                    if (updates === true) {
+                        Firebase.app().database()
+                            .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks`)
+                            .get()
+                            .then(snapshot => {
+                                const objects = Object.values(snapshot.val() || {});
+
+                                Firebase.app().database()
+                                    .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks`)
+                                    .get()
+                                    .then(snapshot => {
+                                        const objects2 = Object.values(snapshot.val() || {});
+
+                                        objects.map((item, index) => {
+                                            Firebase.app().database()
+                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/tasks/${item.name}`)
+                                                .update({
+                                                    month: "0:0"
+                                                })
+                                        })
+
+                                        objects2.map((item, index) => {
+                                            Firebase.app().database()
+                                                .ref(`users/${Firebase.app().auth().currentUser?.uid}/deletedtasks/${item.name}/month`)
+                                                .remove()
+                                        })
+                                    })
+
+
+                            })
+                    }
                 })
 
             Firebase.app().database()
@@ -81,7 +127,8 @@ export default function Startpage() {
                     Firebase.app().database()
                         .ref(`users/${Firebase.app().auth().currentUser?.uid}`)
                         .update({
-                            day: new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear()
+                            day: new Date().getDate() + "." + new Date().getMonth() + "." + new Date().getFullYear(),
+                            month: new Date().getMonth() + "." + new Date().getFullYear(),
                         })
                 })
 
