@@ -343,6 +343,8 @@ export default function Startpage() {
                         <h3>current Tasks</h3>
                     </Col>
                 </Row>
+                <hr/>
+                <br/>
                 <Table striped>
                     <tbody>
                     {allTasks?.map((task, index) =>

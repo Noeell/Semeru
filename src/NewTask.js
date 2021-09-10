@@ -1,4 +1,4 @@
-import {Button, Col, Container, Row, Table} from "react-bootstrap";
+import {Button, Col, Container, FormControl, Row, Table} from "react-bootstrap";
 import Firebase from "firebase/compat";
 import {useEffect, useState} from "react";
 
@@ -90,10 +90,18 @@ export default function NewTask() {
                     </Col>
                 </Row>
                 <br/>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={"4"}>
+                        <div className="form-floating">
+                            <FormControl type="text"
+                                         placeholder="ddd"
+                                         onChange={e => setNewTaskName(e.target.value)}/>
+                            <label htmlFor="floatingInput">New Task:</label>
+                        </div>
+                    </Col>
+                </Row>
                 <Row>
                     <Col>
-                        <h3>new Task:</h3>
-                        <input value={newTaskName} onChange={e => setNewTaskName(e.target.value)}/><br/>
                         {m}<br/>
                         <Button onClick={addNewTask}>new Task</Button><br/>
                     </Col>
